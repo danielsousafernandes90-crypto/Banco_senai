@@ -1,0 +1,1259 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Trabalho SENAI - Banco do Brasil</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f6f7f9, #0055aa);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+
+        .app-container {
+            width: 100%;
+            max-width: 430px;
+            min-height: 600px;
+        }
+
+
+        /* =========================
+           TELAS DE LOGIN E CADASTRO
+           ========================= */
+
+        .form-screen {
+            background: white;
+            border-radius: 18px;
+            padding: 35px 30px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+
+        .logo-circulo {
+            width: 70px;
+            height: 70px;
+            background: #ffcc00;
+            color: #003399;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+            font-weight: bold;
+            border: 4px solid #003399;
+        }
+
+
+        .login-header h2 {
+            color: #003399;
+            margin-bottom: 8px;
+        }
+
+
+        .login-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+
+        .input-group label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            background: white;
+        }
+
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #003399;
+            box-shadow: 0 0 0 2px rgba(0, 51, 153, 0.1);
+        }
+
+
+        .btn-primary {
+            width: 100%;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            background: #003399;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+
+        .btn-primary:hover {
+            background: #002477;
+        }
+
+
+        .btn-primary:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+
+        .link-alternativo {
+            text-align: center;
+            color: #003399;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+
+        .link-alternativo:hover {
+            text-decoration: underline;
+        }
+
+
+        .mensagem {
+            text-align: center;
+            font-weight: bold;
+            min-height: 20px;
+        }
+
+
+        /* =========================
+           DASHBOARD
+           ========================= */
+
+        .main-dashboard {
+            display: none;
+            background: #f4f6f9;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+            min-height: 600px;
+        }
+
+
+        .header {
+            background: #003399;
+            color: white;
+            padding: 25px;
+        }
+
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+
+        .user-badge {
+            width: 45px;
+            height: 45px;
+            background: #ffcc00;
+            color: #003399;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+
+        .logo-bb {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+
+        .welcome-text {
+            margin-top: 20px;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+
+        .content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+
+        .card-title {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+
+        .card-amount {
+            font-size: 28px;
+            font-weight: bold;
+            color: #111;
+        }
+
+
+        .card-detail {
+            margin-top: 8px;
+            color: #003399;
+            font-size: 13px;
+        }
+
+
+        .actions-menu {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            padding: 20px;
+            margin-top: 10px;
+        }
+
+
+        .action-item {
+            text-align: center;
+            cursor: pointer;
+            color: #003399;
+        }
+
+
+        .action-icon {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+
+        .action-label {
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           RESPONSIVO
+           ========================= */
+
+        @media (max-width: 480px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .form-screen {
+                padding: 25px 20px;
+            }
+
+            .app-container {
+                min-height: auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="app-container">
+
+
+    <!-- =========================
+         1. TELA DE LOGIN
+         ========================= -->
+
+    <div
+        class="form-screen"
+        id="tela-login"
+    >
+
+        <div class="login-header">
+
+            <div class="logo-circulo">
+                BB
+            </div>
+
+            <h2>
+                Trabalho SENAI
+            </h2>
+
+            <p>
+                Acesse sua conta do Banco do Brasil
+            </p>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label for="login-agencia">
+                Agência
+            </label>
+
+            <input
+                type="text"
+                id="login-agencia"
+                value="0001"
+                placeholder="Ex: 0001"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label for="login-conta">
+                Conta Corrente
+            </label>
+
+            <input
+                type="text"
+                id="login-conta"
+                value="1234-5"
+                placeholder="Ex: 1234-5"
+            >
+
+        </div>
+
+
+        <button
+            class="btn-primary"
+            onclick="executarLogin()"
+        >
+            Entrar no App
+        </button>
+
+
+        <div
+            class="link-alternativo"
+            onclick="mudarTela('tela-login', 'tela-cadastro')"
+        >
+            Não tem conta? Cadastre-se aqui
+        </div>
+
+
+        <div
+            class="link-alternativo"
+            onclick="mudarTela('tela-login', 'tela-funcionario')"
+        >
+            Cadastrar Funcionário
+        </div>
+
+
+        <div
+            class="mensagem"
+            id="mensagem-login"
+        ></div>
+
+    </div>
+
+
+
+    <!-- =========================
+         2. TELA DE CADASTRO DE CONTA
+         ========================= -->
+
+    <div
+        class="form-screen"
+        id="tela-cadastro"
+        style="display: none;"
+    >
+
+        <div class="login-header">
+
+            <div class="logo-circulo">
+                BB
+            </div>
+
+            <h2>
+                Abrir Nova Conta
+            </h2>
+
+            <p>
+                Crie suas credenciais simuladas do BB
+            </p>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label for="cad-nome">
+                Nome Completo
+            </label>
+
+            <input
+                type="text"
+                id="cad-nome"
+                placeholder="Ex: João Silva"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label for="cad-agencia">
+                Agência
+            </label>
+
+            <input
+                type="text"
+                id="cad-agencia"
+                value="0001"
+                placeholder="Ex: 0001"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label for="cad-conta">
+                Número da Conta
+            </label>
+
+            <input
+                type="text"
+                id="cad-conta"
+                placeholder="Ex: 9999-9"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label for="cad-saldo">
+                Saldo Inicial (R$)
+            </label>
+
+            <input
+                type="number"
+                id="cad-saldo"
+                value="100"
+                min="0"
+                step="0.01"
+                placeholder="Ex: 100"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label for="cad-tipo">
+                Tipo de Conta
+            </label>
+
+            <select id="cad-tipo">
+
+                <option value="Conta Corrente BB">
+                    Conta Corrente BB
+                </option>
+
+                <option value="Poupança Ouro BB">
+                    Poupança Ouro BB
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            class="btn-primary"
+            id="btn-cadastro"
+            onclick="executarCadastro()"
+        >
+            Finalizar Cadastro
+        </button>
+
+
+        <div
+            class="mensagem"
+            id="mensagem-cadastro"
+        ></div>
+
+
+        <div
+            class="link-alternativo"
+            onclick="mudarTela('tela-cadastro', 'tela-login')"
+        >
+            Já tem conta? Voltar ao Login
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         3. TELA DE CADASTRO DE FUNCIONÁRIO
+         ========================= -->
+
+    <div
+        class="form-screen"
+        id="tela-funcionario"
+        style="display: none;"
+    >
+
+        <div class="login-header">
+
+            <div class="logo-circulo">
+                BB
+            </div>
+
+            <h2>
+                Cadastrar Funcionário
+            </h2>
+
+            <p>
+                Cadastre um novo funcionário
+            </p>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label for="func-nome">
+                Nome Completo
+            </label>
+
+            <input
+                type="text"
+                id="func-nome"
+                placeholder="Ex: João da Silva"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label for="func-cpf">
+                CPF
+            </label>
+
+            <input
+                type="text"
+                id="func-cpf"
+                placeholder="Ex: 529.982.247-25"
+                maxlength="14"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label for="func-cargo">
+                Cargo
+            </label>
+
+            <input
+                type="text"
+                id="func-cargo"
+                placeholder="Ex: Gerente"
+            >
+
+        </div>
+
+
+        <button
+            class="btn-primary"
+            id="btn-funcionario"
+            onclick="cadastrarFuncionario()"
+        >
+            Cadastrar Funcionário
+        </button>
+
+
+        <div
+            class="mensagem"
+            id="mensagem-funcionario"
+        ></div>
+
+
+        <div
+            class="link-alternativo"
+            onclick="mudarTela('tela-funcionario', 'tela-login')"
+        >
+            Voltar ao Login
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         4. DASHBOARD
+         ========================= -->
+
+    <div
+        class="main-dashboard"
+        id="tela-dashboard"
+    >
+
+        <div class="header">
+
+            <div class="header-top">
+
+                <div
+                    class="user-badge"
+                    id="iniciais-user"
+                >
+                    BB
+                </div>
+
+                <div class="logo-bb">
+                    Banco do Brasil
+                </div>
+
+            </div>
+
+
+            <div
+                class="welcome-text"
+                id="nome-cliente"
+            >
+                Olá, Cliente
+            </div>
+
+        </div>
+
+
+        <div class="content">
+
+            <div class="card">
+
+                <div class="card-title">
+                    💰 Saldo em conta
+                </div>
+
+                <div
+                    class="card-amount"
+                    id="valor-saldo"
+                >
+                    R$ 0,00
+                </div>
+
+                <div
+                    class="card-detail"
+                    id="tipo-conta"
+                >
+                    Conta Corrente
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    💳 Fatura Ourocard
+                </div>
+
+                <div
+                    class="card-amount"
+                    style="color: #003399;"
+                >
+                    R$ 0,00
+                </div>
+
+                <div
+                    class="card-detail"
+                    style="color: #666;"
+                >
+                    Limite BB disponível:
+                    R$ 2.000,00
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="actions-menu">
+
+            <div
+                class="action-item"
+                onclick="abrirPix()"
+            >
+
+                <div class="action-icon">
+                    ⚡
+                </div>
+
+                <div class="action-label">
+                    Pix
+                </div>
+
+            </div>
+
+
+            <div
+                class="action-item"
+                onclick="mudarTela('tela-dashboard', 'tela-funcionario')"
+            >
+
+                <div class="action-icon">
+                    👤
+                </div>
+
+                <div class="action-label">
+                    Funcionário
+                </div>
+
+            </div>
+
+
+            <div
+                class="action-item"
+                onclick="sair()"
+            >
+
+                <div class="action-icon">
+                    🚪
+                </div>
+
+                <div class="action-label">
+                    Sair
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+     ========================= -->
+
+<script>
+
+
+    // =========================
+    // TROCAR DE TELA
+    // =========================
+
+    function mudarTela(telaAtual, proximaTela) {
+
+        document.getElementById(telaAtual).style.display = "none";
+
+        document.getElementById(proximaTela).style.display = "flex";
+
+    }
+
+
+
+    // =========================
+    // LOGIN
+    // =========================
+
+    async function executarLogin() {
+
+        const agencia =
+            document.getElementById("login-agencia").value.trim();
+
+        const conta =
+            document.getElementById("login-conta").value.trim();
+
+
+        const mensagem =
+            document.getElementById("mensagem-login");
+
+
+        if (!agencia || !conta) {
+
+            mensagem.style.color = "red";
+
+            mensagem.innerText =
+                "Preencha a agência e a conta.";
+
+            return;
+
+        }
+
+
+        try {
+
+            const resposta = await fetch(
+                `/api/v1/auth/login?agencia=${encodeURIComponent(agencia)}&conta=${encodeURIComponent(conta)}`
+            );
+
+
+            const dados = await resposta.json();
+
+
+            if (!resposta.ok) {
+
+                mensagem.style.color = "red";
+
+                mensagem.innerText =
+                    dados.detail || "Agência ou conta inválidas.";
+
+                return;
+
+            }
+
+
+            const cliente = dados.dados;
+
+
+            document.getElementById(
+                "nome-cliente"
+            ).innerText =
+                `Olá, ${cliente.titular}`;
+
+
+            document.getElementById(
+                "valor-saldo"
+            ).innerText =
+                `R$ ${Number(cliente.saldo).toLocaleString(
+                    "pt-BR",
+                    {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                )}`;
+
+
+            document.getElementById(
+                "tipo-conta"
+            ).innerText =
+                cliente.tipo;
+
+
+            const iniciais =
+                cliente.titular
+                    .split(" ")
+                    .filter(nome => nome.length > 0)
+                    .slice(0, 2)
+                    .map(nome => nome[0])
+                    .join("")
+                    .toUpperCase();
+
+
+            document.getElementById(
+                "iniciais-user"
+            ).innerText = iniciais;
+
+
+            document.getElementById(
+                "tela-login"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "tela-dashboard"
+            ).style.display = "block";
+
+        }
+
+        catch (erro) {
+
+            mensagem.style.color = "red";
+
+            mensagem.innerText =
+                "Erro ao conectar com o servidor.";
+
+            console.error(erro);
+
+        }
+
+    }
+
+
+
+    // =========================
+    // CADASTRO DE CONTA
+    // =========================
+
+    async function executarCadastro() {
+
+        const nome =
+            document.getElementById("cad-nome").value.trim();
+
+        const agencia =
+            document.getElementById("cad-agencia").value.trim();
+
+        const conta =
+            document.getElementById("cad-conta").value.trim();
+
+        const saldo =
+            document.getElementById("cad-saldo").value;
+
+        const tipo =
+            document.getElementById("cad-tipo").value;
+
+
+        const mensagem =
+            document.getElementById("mensagem-cadastro");
+
+
+        if (!nome || !agencia || !conta || !saldo) {
+
+            mensagem.style.color = "red";
+
+            mensagem.innerText =
+                "Preencha todos os campos.";
+
+            return;
+
+        }
+
+
+        try {
+
+            const resposta = await fetch(
+                "/api/v1/auth/cadastrar",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        agencia: agencia,
+
+                        conta: conta,
+
+                        titular: nome,
+
+                        saldo_inicial: Number(saldo),
+
+                        tipo: tipo
+
+                    })
+
+                }
+            );
+
+
+            const dados =
+                await resposta.json();
+
+
+            if (!resposta.ok) {
+
+                mensagem.style.color = "red";
+
+                mensagem.innerText =
+                    dados.detail || "Erro ao cadastrar conta.";
+
+                return;
+
+            }
+
+
+            mensagem.style.color = "green";
+
+            mensagem.innerText =
+                "Cliente cadastrado com sucesso!";
+
+
+            document.getElementById(
+                "cad-nome"
+            ).value = "";
+
+            document.getElementById(
+                "cad-conta"
+            ).value = "";
+
+            document.getElementById(
+                "cad-saldo"
+            ).value = "100";
+
+        }
+
+        catch (erro) {
+
+            mensagem.style.color = "red";
+
+            mensagem.innerText =
+                "Erro ao conectar com o servidor.";
+
+            console.error(erro);
+
+        }
+
+    }
+
+
+
+    // =========================
+    // CADASTRO DE FUNCIONÁRIO
+    // =========================
+
+    async function cadastrarFuncionario() {
+
+        const nome =
+            document.getElementById("func-nome").value.trim();
+
+        const cpf =
+            document.getElementById("func-cpf").value.trim();
+
+        const cargo =
+            document.getElementById("func-cargo").value.trim();
+
+
+        const mensagem =
+            document.getElementById(
+                "mensagem-funcionario"
+            );
+
+
+        if (!nome || !cpf || !cargo) {
+
+            mensagem.style.color = "red";
+
+            mensagem.innerText =
+                "Preencha todos os campos.";
+
+            return;
+
+        }
+
+
+        try {
+
+            const resposta = await fetch(
+                "/api/v1/funcionarios/cadastrar",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        nome: nome,
+
+                        cpf: cpf,
+
+                        cargo: cargo
+
+                    })
+
+                }
+            );
+
+
+            const dados =
+                await resposta.json();
+
+
+            if (!resposta.ok) {
+
+                mensagem.style.color = "red";
+
+                mensagem.innerText =
+                    dados.detail || "CPF inválido!";
+
+                return;
+
+            }
+
+
+            mensagem.style.color = "green";
+
+            mensagem.innerText =
+                "Funcionário cadastrado!";
+
+
+            document.getElementById(
+                "func-nome"
+            ).value = "";
+
+
+            document.getElementById(
+                "func-cpf"
+            ).value = "";
+
+
+            document.getElementById(
+                "func-cargo"
+            ).value = "";
+
+        }
+
+        catch (erro) {
+
+            mensagem.style.color = "red";
+
+            mensagem.innerText =
+                "Erro ao conectar com o servidor.";
+
+            console.error(erro);
+
+        }
+
+    }
+
+
+
+    // =========================
+    // MÁSCARA DO CPF
+    // =========================
+
+    document
+        .getElementById("func-cpf")
+        .addEventListener("input", function(event) {
+
+            let cpf =
+                event.target.value.replace(/\D/g, "");
+
+            cpf = cpf.substring(0, 11);
+
+
+            if (cpf.length > 9) {
+
+                cpf =
+                    cpf.replace(
+                        /^(\d{3})(\d{3})(\d{3})(\d{0,2})$/,
+                        "$1.$2.$3-$4"
+                    );
+
+            }
+            else if (cpf.length > 6) {
+
+                cpf =
+                    cpf.replace(
+                        /^(\d{3})(\d{3})(\d{0,3})$/,
+                        "$1.$2.$3"
+                    );
+
+            }
+            else if (cpf.length > 3) {
+
+                cpf =
+                    cpf.replace(
+                        /^(\d{3})(\d{0,3})$/,
+                        "$1.$2"
+                    );
+
+            }
+
+
+            event.target.value = cpf;
+
+        });
+
+
+
+    // =========================
+    // PIX
+    // =========================
+
+    function abrirPix() {
+
+        alert(
+            "Área Pix - funcionalidade simulada."
+        );
+
+    }
+
+
+
+    // =========================
+    // SAIR
+    // =========================
+
+    function sair() {
+
+        document.getElementById(
+            "tela-dashboard"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "tela-login"
+        ).style.display = "flex";
+
+
+        document.getElementById(
+            "mensagem-login"
+        ).innerText = "";
+
+
+        alert(
+            "Você saiu da conta."
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
